@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.MedicinaMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Medicina" >
+    <constructor >
+      <idArg column="medi_no" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="medi_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="medi_type_no" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="medi_unit" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="medi_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="medi_price" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="medi_data" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="medi_bzq" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    medi_no, medi_name, medi_type_no, medi_unit, medi_num, medi_price, medi_data, medi_bzq
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_medicina
+    where medi_no = #{mediNo,jdbcType=INTEGER}
+  </select>
+
+    <select id="list" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/>
+      from t_medicina where 1=1
+      <if test="mediName!=null" >
+        and medi_name = #{mediName}
+      </if>
+      <if test="mediTypeNo!=null" >
+        and medi_type_no = #{mediTypeNo}
+      </if>
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_medicina
+    where medi_no = #{mediNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Medicina" >
+    insert into t_medicina (medi_no, medi_name, medi_type_no, 
+      medi_unit, medi_num, medi_price, 
+      medi_data, medi_bzq)
+    values (#{mediNo,jdbcType=INTEGER}, #{mediName,jdbcType=VARCHAR}, #{mediTypeNo,jdbcType=INTEGER}, 
+      #{mediUnit,jdbcType=VARCHAR}, #{mediNum,jdbcType=INTEGER}, #{mediPrice,jdbcType=REAL}, 
+      #{mediData,jdbcType=TIMESTAMP}, #{mediBzq,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Medicina" >
+    insert into t_medicina
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mediNo != null" >
+        medi_no,
+      </if>
+      <if test="mediName != null" >
+        medi_name,
+      </if>
+      <if test="mediTypeNo != null" >
+        medi_type_no,
+      </if>
+      <if test="mediUnit != null" >
+        medi_unit,
+      </if>
+      <if test="mediNum != null" >
+        medi_num,
+      </if>
+      <if test="mediPrice != null" >
+        medi_price,
+      </if>
+      <if test="mediData != null" >
+        medi_data,
+      </if>
+      <if test="mediBzq != null" >
+        medi_bzq,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mediNo != null" >
+        #{mediNo,jdbcType=INTEGER},
+      </if>
+      <if test="mediName != null" >
+        #{mediName,jdbcType=VARCHAR},
+      </if>
+      <if test="mediTypeNo != null" >
+        #{mediTypeNo,jdbcType=INTEGER},
+      </if>
+      <if test="mediUnit != null" >
+        #{mediUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="mediNum != null" >
+        #{mediNum,jdbcType=INTEGER},
+      </if>
+      <if test="mediPrice != null" >
+        #{mediPrice,jdbcType=REAL},
+      </if>
+      <if test="mediData != null" >
+        #{mediData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mediBzq != null" >
+        #{mediBzq,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Medicina" >
+    update t_medicina
+    <set >
+      <if test="mediName != null" >
+        medi_name = #{mediName,jdbcType=VARCHAR},
+      </if>
+      <if test="mediTypeNo != null" >
+        medi_type_no = #{mediTypeNo,jdbcType=INTEGER},
+      </if>
+      <if test="mediUnit != null" >
+        medi_unit = #{mediUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="mediNum != null" >
+        medi_num = #{mediNum,jdbcType=INTEGER},
+      </if>
+      <if test="mediPrice != null" >
+        medi_price = #{mediPrice,jdbcType=REAL},
+      </if>
+      <if test="mediData != null" >
+        medi_data = #{mediData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mediBzq != null" >
+        medi_bzq = #{mediBzq,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where medi_no = #{mediNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Medicina" >
+    update t_medicina
+    set medi_name = #{mediName,jdbcType=VARCHAR},
+      medi_type_no = #{mediTypeNo,jdbcType=INTEGER},
+      medi_unit = #{mediUnit,jdbcType=VARCHAR},
+      medi_num = #{mediNum,jdbcType=INTEGER},
+      medi_price = #{mediPrice,jdbcType=REAL},
+      medi_data = #{mediData,jdbcType=TIMESTAMP},
+      medi_bzq = #{mediBzq,jdbcType=VARCHAR}
+    where medi_no = #{mediNo,jdbcType=INTEGER}
+  </update>
+</mapper>
