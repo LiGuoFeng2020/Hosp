@@ -4,6 +4,8 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 @ToString
 public class User implements Serializable {
     private Integer userid;
@@ -15,6 +17,8 @@ public class User implements Serializable {
     private String salt;
 
     private Date createdate;
+
+    private Role role;
 
     public User(Integer userid, String username, String password, String salt, Date createdate) {
         this.userid = userid;
