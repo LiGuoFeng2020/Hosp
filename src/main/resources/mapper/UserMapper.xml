@@ -10,6 +10,21 @@
       <arg column="createdate" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
+
+<!--  多对一关联关系映射  -->
+  <resultMap id="many2one" type="com.zking.ssm.model.User">
+    <id column="userid" property="userid" javaType="java.lang.Integer" />
+    <result column="username" property="username" javaType="java.lang.String" />
+    <result column="PASSWORD" property="password" javaType="java.lang.String" />
+    <result column="salt" property="salt" javaType="java.lang.String" />
+    <result column="createdate" property="createdate" javaType="java.util.Date" />
+    <association property="role" javaType="com.zking.ssm.model.Role">
+      <id column="roleid" property="roleid" javaType="java.lang.Integer"/>
+      <result column="rolename" property="rolename" javaType="java.lang.String"/>
+      <result column="description" property="description" javaType="java.lang.String"/>
+    </association>
+  </resultMap>
+
   <sql id="Base_Column_List" >
     userid, username, PASSWORD, salt, createdate
   </sql>

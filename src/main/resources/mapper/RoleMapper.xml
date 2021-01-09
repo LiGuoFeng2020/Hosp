@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.Role" >
+    <constructor >
+      <idArg column="roleid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="rolename" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="description" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+
+<!--  用户一对多关联关系映射  -->
+  <resultMap id="one2many" type="com.zking.ssm.model.Role" >
+    <id column="roleid" property="roleid" javaType="java.lang.Integer"/>
+    <result column="rolename" property="rolename" javaType="java.lang.String"/>
+    <result column="description" property="description" javaType="java.lang.String"/>
+    <collection property="users" ofType="com.zking.ssm.model.User">
+      <id column="userid" property="userid" javaType="java.lang.Integer" />
+      <result column="username" property="username" javaType="java.lang.String" />
+      <result column="PASSWORD" property="password" javaType="java.lang.String" />
+      <result column="salt" property="salt" javaType="java.lang.String" />
+      <result column="createdate" property="createdate" javaType="java.util.Date" />
+    </collection>
+  </resultMap>
+
+  <!--  菜单多对多关联关系映射  -->
+  <resultMap id="many2many" type="com.zking.ssm.model.Role" >
+    <id column="roleid" property="roleid" javaType="java.lang.Integer"/>
+    <result column="rolename" property="rolename" javaType="java.lang.String"/>
+    <result column="description" property="description" javaType="java.lang.String"/>
+    <collection property="treeNodes" ofType="com.zking.ssm.model.TreeNode">
+      <id column="tree_node_id" property="treeNodeId" javaType="java.lang.Integer" />
+      <result column="tree_node_name" property="treeNodeName" javaType="java.lang.String" />
+      <result column="tree_node_type" property="treeNodeType" javaType="java.lang.Integer" />
+      <result column="parent_node_id" property="parentNodeId" javaType="java.lang.Integer" />
+      <result column="url" property="url" javaType="java.lang.String" />
+      <result column="position" property="position" javaType="java.lang.Integer" />
+      <result column="icon" property="icon" javaType="java.lang.String" />
+    </collection>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    roleid, rolename, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_role
+    where roleid = #{roleid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_role
+    where roleid = #{roleid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.ssm.model.Role" >
+    insert into t_role (roleid, rolename, description
+      )
+    values (#{roleid,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.ssm.model.Role" >
+    insert into t_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        roleid,
+      </if>
+      <if test="rolename != null" >
+        rolename,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="rolename != null" >
+        #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.ssm.model.Role" >
+    update t_role
+    <set >
+      <if test="rolename != null" >
+        rolename = #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where roleid = #{roleid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.ssm.model.Role" >
+    update t_role
+    set rolename = #{rolename,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where roleid = #{roleid,jdbcType=INTEGER}
+  </update>
+</mapper>

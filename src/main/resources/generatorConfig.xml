@@ -72,14 +72,29 @@
             <!--&lt;!&ndash; <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> &ndash;&gt;-->
         <!--</table>-->
 
-
+        <!-- 角色表 -->
+<!--        <table schema="" tableName="t_role" domainObjectName="Role"-->
+<!--                        enableCountByExample="false" enableDeleteByExample="false"-->
+<!--                        enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--        &lt;!&ndash; 忽略列，不生成bean 字段 &ndash;&gt;-->
+<!--        &lt;!&ndash; <ignoreColumn column="FRED" /> &ndash;&gt;-->
+<!--        &lt;!&ndash; 指定列的java数据类型 &ndash;&gt;-->
+<!--        &lt;!&ndash; <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> &ndash;&gt;-->
+<!--         </table>-->
+<!--        &lt;!&ndash;  药品表  &ndash;&gt;-->
 <!--        <table schema="" tableName="t_medicina" domainObjectName="Medicina"-->
 <!--               enableCountByExample="false" enableDeleteByExample="false"-->
 <!--               enableSelectByExample="false" enableUpdateByExample="false">-->
-<!--            &lt;!&ndash; 忽略列，不生成bean 字段 &ndash;&gt;-->
-<!--            &lt;!&ndash; <ignoreColumn column="FRED" /> &ndash;&gt;-->
-<!--            &lt;!&ndash; 指定列的java数据类型 &ndash;&gt;-->
-<!--            &lt;!&ndash; <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> &ndash;&gt;-->
+<!--        </table>-->
+<!--        &lt;!&ndash;  菜单表  &ndash;&gt;-->
+<!--        <table schema="" tableName="t_tree_node" domainObjectName="TreeNode"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false">-->
+<!--        </table>-->
+<!--        &lt;!&ndash;  用户表  &ndash;&gt;-->
+<!--        <table schema="" tableName="t_user" domainObjectName="User"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false">-->
 <!--        </table>-->
 
 
