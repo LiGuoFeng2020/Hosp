@@ -1,11 +1,18 @@
 package com.zking.ssm.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-@ToString
-public class Permission implements Serializable {
+
+@Data
+@AllArgsConstructor
+public class TreeNode implements Serializable {
     private Integer treeNodeId;
 
     private String treeNodeName;
@@ -20,7 +27,16 @@ public class Permission implements Serializable {
 
     private String icon;
 
-    public Permission(Integer treeNodeId, String treeNodeName, Integer treeNodeType, Integer parentNodeId, String url, Integer position, String icon) {
+    // 一对多关系映射
+    private List<TreeNode> children = new ArrayList<>();
+    // 多对一关系映射
+    @JsonIgnore
+    private TreeNode parent;
+
+    //多对多关联关系映射
+    private List<Role> roles=new ArrayList<>();
+
+    public TreeNode(Integer treeNodeId, String treeNodeName, Integer treeNodeType, Integer parentNodeId, String url, Integer position, String icon) {
         this.treeNodeId = treeNodeId;
         this.treeNodeName = treeNodeName;
         this.treeNodeType = treeNodeType;
@@ -30,7 +46,7 @@ public class Permission implements Serializable {
         this.icon = icon;
     }
 
-    public Permission() {
+    public TreeNode() {
         super();
     }
 
@@ -88,5 +104,20 @@ public class Permission implements Serializable {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    @Override
+    public String toString() {
+        return "TreeNode{" +
+                "treeNodeId=" + treeNodeId +
+                ", treeNodeName='" + treeNodeName + '\'' +
+                ", treeNodeType=" + treeNodeType +
+                ", parentNodeId=" + parentNodeId +
+                ", url='" + url + '\'' +
+                ", position=" + position +
+                ", icon='" + icon + '\'' +
+                ", children=" + children +
+                ", roles=" + roles +
+                '}';
     }
 }
